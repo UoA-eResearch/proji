@@ -25,7 +25,7 @@ A helper cli script to manage research projects at the Centre for eResearch (Uni
 [default]
 url = https://web.ceres.auckland.ac.nz/eresearch/api
 username = mbin029
-token = b0ecc357-7a2a-4504-88f1-bd78316cebd4
+token = xxxxx
 #+END_EXAMPLE
 
 
