@@ -21,10 +21,12 @@ A helper cli script to manage research projects at the Centre for eResearch (Uni
 
 *proji* reads a config file $HOME/.proji.conf, in the format:
 
-    [default]
-    url = https://web.ceres.auckland.ac.nz/eresearch/api
-    username = mbin029
-    token = b0ecc357-7a2a-4504-88f1-bd78316cebd4
+#BEGIN_EXAMPLE
+[default]
+url = https://web.ceres.auckland.ac.nz/eresearch/api
+username = mbin029
+token = b0ecc357-7a2a-4504-88f1-bd78316cebd4
+#END_EXAMPLE
 
 You can add different profiles (backends & auth details) by adding more here, and specify the profile name (instead of 'default') in the '-p' option when running *proji*.
 
