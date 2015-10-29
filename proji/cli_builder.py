@@ -9,6 +9,24 @@ def is_api_method(field):
     return inspect.ismethod(field) and field.__name__.startswith(API_MARKER)
 
 
+def create_output_item(item, output_format=None):
+
+    result = ""
+
+    if output_format:
+        values = []
+        for token in output_format.split(","):
+            v = getattr(item, token)
+            values.append(unicode(v).replace('\n', ' '))
+
+        result = u'\t'.join(values).encode('utf-8')
+
+    else:
+        result = pformat(dict(item))
+
+    return result
+
+
 def create_arg_object(subparsers, name, argtype_translation_dict, arguments_dict, return_dict, description):
 
     desc = description
@@ -108,7 +126,7 @@ class CliCommands(object):
         return self.result
 
 
-    def print_result(self, output_format=None, seperator='\n'):
+    def print_result(self, output_format=None, separator='\n'):
 
         if isinstance(self.result, bool):
             print self.result
@@ -117,29 +135,13 @@ class CliCommands(object):
         if isinstance(self.result, list):
             output = []
             for item in self.result:
-                output.append(self.create_output_item(item, output_format))
 
-            print seperator.join(output)
+                output.append(create_output_item(item, output_format))
 
+            print separator.join(output)
             return
 
         else:
-            output = self.create_output_item(self.result, output_format)
+            output = create_output_item(self.result, output_format)
             print output
 
-    def create_output_item(self, item, output_format):
-
-        result = ""
-
-        if output_format:
-            values = []
-            for token in output_format.split(","):
-                v = getattr(item, token)
-                values.append(unicode(v).replace('\n', ' '))
-
-            result = u'\t'.join(values).encode('utf-8')
-
-        else:
-            result = pformat(dict(item))
-
-        return result

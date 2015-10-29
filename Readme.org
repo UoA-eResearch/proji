@@ -1,0 +1,37 @@
+* Proji
+
+A helper cli script to manage research projects at the Centre for eResearch (University of Auckland).
+
+** Requirements
+
+ - python-dev package
+
+ - argparse
+ - restkit
+ - booby
+ - simplejson
+ - prinx
+ - setuptools
+
+** Installation
+
+    (sudo) pip install xxx
+
+** Usage (commandline client)
+
+*proji* reads a config file $HOME/.proji.conf, in the format:
+
+    [default]
+    url = https://web.ceres.auckland.ac.nz/eresearch/api
+    username = mbin029
+    token = b0ecc357-7a2a-4504-88f1-bd78316cebd4
+
+You can add different profiles (backends & auth details) by adding more here, and specify the profile name (instead of 'default') in the '-p' option when running *proji*.
+
+Basic usage is displayed via:
+
+    proji -h
+
+Command specific usage can be displayed via:
+
+    proji [command] -h
