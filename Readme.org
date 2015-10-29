@@ -33,11 +33,11 @@ You can add different profiles (backends & auth details) by adding more here, an
 
 Basic usage is displayed via:
 
-    proji -h
+    : proji -h
 
 Command specific usage can be displayed via:
 
-    proji [command] -h
+    : proji [command] -h
 
 
 *** Examples
