@@ -1,3 +1,5 @@
+# PYTHON_ARGCOMPLETE_OK
+
 from projectdb_api import projectdb_api, PROJECTDB_DEFAULT_URL
 from projectdb_models import *
 import argparse

@@ -4,7 +4,7 @@ A helper cli script to manage research projects at the Centre for eResearch (Uni
 
 ** Requirements
 
- - python-dev package
+ - python-dev package (or install simplejson via package, not pip)
 
  - argparse
  - restkit
@@ -38,3 +38,23 @@ Basic usage is displayed via:
 Command specific usage can be displayed via:
 
     proji [command] -h
+
+
+*** Examples
+
+**** Display a list of all possible model types
+    : TODO
+
+The following examples can be used on any of the possible model types.
+
+**** List all projects (prints out json format)
+    : proji list_project
+
+**** List all projects and only print out the id and title properties
+    : proji -o id,title list_project
+
+**** Get details for project with id 1
+    : proji get_project --id 1
+
+**** Get details for project with id 1, but only print title
+    : proji -o title get_project --id 1

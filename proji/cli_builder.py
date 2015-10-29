@@ -1,4 +1,5 @@
 import argparse
+import argcomplete
 import inspect
 from parinx import parser
 from pprint import pprint, pformat
@@ -85,6 +86,7 @@ class CliCommands(object):
         self.subparsers = self.root_parser.add_subparsers(help='sub-command to run')
         self.arg_details = {}
 
+
     def add_command(self, cls):
 
         details = construct_arguments(self.subparsers, self.argtype_translation_dict, cls)
@@ -93,6 +95,7 @@ class CliCommands(object):
 
     def parse_arguments(self):
 
+        argcomplete.autocomplete(self.root_parser)
         self.namespace = self.root_parser.parse_args()
         self.command = self.namespace.command
 

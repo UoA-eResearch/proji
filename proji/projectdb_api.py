@@ -65,13 +65,13 @@ def add_get_method(cls, model_type):
         return result
 
     get_method.__doc__ = '''
-    Returns the {0} with id {1}.
+    Returns the {0} with the specified id.
 
     :type id: int
     :param id: the id of the {0}
     :return: the {0}
     :rtype: {0}
-    '''.format(model_type, id)
+    '''.format(model_type)
     get_method.__name__ = 'call_get_{0}'.format(model_type)
     setattr(cls, get_method.__name__, get_method)
 
