@@ -10,7 +10,7 @@ A helper cli script to manage research projects at the Centre for eResearch (Uni
  - restkit
  - booby
  - simplejson
- - prinx
+ - parinx
  - setuptools
 
 ** Installation
@@ -21,7 +21,6 @@ A helper cli script to manage research projects at the Centre for eResearch (Uni
 
 *proji* reads a config file $HOME/.proji.conf, in the format:
 
-<<<<<<< HEAD
 #+BEGIN_EXAMPLE
 [default]
 url = https://web.ceres.auckland.ac.nz/eresearch/api

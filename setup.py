@@ -7,7 +7,10 @@ setup(name='proji',
       install_requires=[
           "argparse",
           "requests",
-          "psutil"
+          "restkit",
+          "booby",
+          "simplejson",
+          "parinx"
       ],
       packages=["proji"],
       entry_points={
