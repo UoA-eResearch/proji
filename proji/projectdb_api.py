@@ -76,6 +76,35 @@ def add_get_method(cls, model_type):
     setattr(cls, get_method.__name__, get_method)
 
 
+def add_change_value_method(cls, model_type):
+
+    def change_value_method(self, id, key, value):
+
+        value_dict = {key: value}
+        value_json = json.dumps(value_dict)
+
+        response = self.put('/{0}/{1}'.format(model_type, id), headers=self.headers, payload=value_json)
+
+        print response
+        return True
+
+    change_value_method.__doc__ = '''
+    Changes one key/value pair for the {0} with the specified id.
+
+    :type id: int
+    :param id: the id of the {0}
+    :type key: str
+    :param key: the key
+    :type value: str
+    :param value: the value
+    :return: whether the the setting of the value succeeded
+    :rtype: bool
+    '''.format(model_type)
+    change_value_method.__name__ = 'call_change_value_{0}'.format(model_type)
+    setattr(cls, change_value_method.__name__, change_value_method)
+
+
+
 classes = [
         'authzRole',
         'department',
@@ -120,3 +149,4 @@ class projectdb_api(Resource):
 for model_type in classes:
     add_list_method(projectdb_api, model_type)
     add_get_method(projectdb_api, model_type)
+    add_change_value_method(projectdb_api, model_type)

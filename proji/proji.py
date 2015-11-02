@@ -9,7 +9,7 @@ import sys
 import logging
 from pprint import pprint, pformat
 from booby import Model
-from cli_builder import CliCommands,is_api_method
+from pyclist.pyclist import pyclist,is_api_method
 
 CONF_FILENAME = 'proji.conf'
 CONF_HOME = os.path.expanduser('~/.'+CONF_FILENAME)
@@ -50,10 +50,10 @@ class Proji(object):
 
         self.config = ProjiConfig()
 
-        self.cli = CliCommands('proj', 'A commandline client for CeR project management.')
+        self.cli = pyclist('proj', 'A commandline client for CeR project management.')
 
         self.cli.root_parser.add_argument('--url', '-u', help='Projectdb base url', default=self.config.projectdb_url)
-        self.cli.root_parser.add_argument('--username', help='Projectdb base url', default=self.config.projectdb_username)
+        self.cli.root_parser.add_argument('--username', help='Projectdb username', default=self.config.projectdb_username)
         self.cli.root_parser.add_argument('--token', help='Token to connect to figshare', default=self.config.projectdb_token)
 
         self.cli.root_parser.add_argument('--profile', '-p', help='Profile to use (profile must be defined in ~/.proji.conf)')
