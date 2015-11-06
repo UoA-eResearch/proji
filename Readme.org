@@ -60,7 +60,7 @@ The following examples can be used on any of the possible model types.
     : proji -o id,title list_project
 
 **** Get details for project with id 1
-    : proji get_project --id 1
+    : proji get_project 1
 
-**** Get details for project with id 1, but only print title
-    : proji -o title get_project --id 1
+**** Get details for projects 1 & 2, but only print title
+    : proji -o title get_project 1 2
