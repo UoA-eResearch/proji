@@ -9,6 +9,7 @@ API doc: https://wiki.auckland.ac.nz/display/CERES/eResearch+Rest+API
 
 from restkit import Resource, BasicAuth
 from projectdb_models import *
+from pyclist.pyclist import API_MARKER
 
 try:
     import simplejson as json
@@ -18,6 +19,9 @@ except ImportError:
 
 
 PROJECTDB_DEFAULT_URL = 'https://web.ceres.auckland.ac.nz/eresearch/api'
+
+POSITIONAL_ARG_REGISTRY = {}
+
 
 # Helper methods ========================================
 def get_request_params(params={}):
@@ -74,7 +78,8 @@ def add_get_method(cls, model_type):
     '''.format(model_type)
     get_method.__name__ = 'call_get_{0}'.format(model_type)
     setattr(cls, get_method.__name__, get_method)
-
+    pretty_method_name = get_method.__name__[len(API_MARKER)+1:]
+    POSITIONAL_ARG_REGISTRY[pretty_method_name] = 'id'
 
 def add_change_value_method(cls, model_type):
 
@@ -140,7 +145,6 @@ class projectdb_api(Resource):
         self.headers = {
             'Content-Type': 'application/json',
         }
-
 
 
 
