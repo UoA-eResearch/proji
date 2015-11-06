@@ -15,7 +15,13 @@ A helper cli script to manage research projects at the Centre for eResearch (Uni
 
 ** Installation
 
-    (sudo) pip install xxx
+*** Release
+
+    (sudo) pip install proji
+
+*** Development version from Github
+
+		(sudo) pip install https://github.com/UoA-eResearch/proji.git
 
 ** Usage (commandline client)
 

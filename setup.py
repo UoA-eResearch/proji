@@ -10,7 +10,8 @@ setup(name='proji',
           "restkit",
           "booby",
           "simplejson",
-          "parinx"
+          "parinx",
+	  "pyclist"
       ],
       packages=["proji"],
       entry_points={
