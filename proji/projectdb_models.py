@@ -25,20 +25,17 @@ class Date(fields.Field):
 
 
 # Models ========================================
-class department(Model):
-
-    id = fields.Integer()
-    code = fields.String()
-    name = fields.String()
-    divisionId = fields.Integer()
-
 
 class division(Model):
+
 
     id = fields.Integer()
     code = fields.String()
     institutionId = fields.Integer()
     name = fields.String()
+    level = fields.Integer()
+    parent = fields.Field()
+    top = fields.Field()
 
 
 class externalReference(Model):
@@ -88,17 +85,11 @@ class kpi(Model):
 class person(Model):
 
     id = fields.Integer()
-    department = fields.String()
-    departmentId = fields.Integer()
-    division = fields.String()
-    divisionId = fields.Integer()
+    affiliations = fields.Collection(fields.Field)
     email = fields.Email()
     endDate = Date()
     fullName = fields.String()
     institution = fields.String()
-    institutionId = fields.Integer()
-    institutionalRole = fields.String()
-    institutionalRoleId = fields.Integer()
     lastModified = fields.Integer()
     notes = fields.String()
     phone = fields.String()
@@ -116,9 +107,7 @@ class personRole(Model):
 class project(Model):
 
     id = fields.Integer()
-    institutionId = fields.Integer()
-    divisionId = fields.Integer()
-    departmentId = fields.Integer()
+    divisionIds = fields.Collection(fields.Integer)
     statusId = fields.Integer()
     typeId = fields.Integer()
     description = fields.String()
@@ -131,9 +120,8 @@ class project(Model):
     startDate = Date()
     todo = fields.String()
 
-    department = fields.String()
-    division = fields.String()
-    institution = fields.String()
+    divisions = fields.String()
+    institutions = fields.String()
     status = fields.String()
     type = fields.String()
 

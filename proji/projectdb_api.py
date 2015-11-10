@@ -10,6 +10,7 @@ API doc: https://wiki.auckland.ac.nz/display/CERES/eResearch+Rest+API
 from restkit import Resource, BasicAuth
 from projectdb_models import *
 from pyclist.pyclist import API_MARKER
+import os
 
 try:
     import simplejson as json
@@ -81,6 +82,38 @@ def add_get_method(cls, model_type):
     pretty_method_name = get_method.__name__[len(API_MARKER)+1:]
     POSITIONAL_ARG_REGISTRY[pretty_method_name] = 'id'
 
+def add_create_method(cls, model_type):
+
+    def create_method(self, json_string_or_file):
+
+        if os.path.exists(json_string_or_file):
+            with open(json_string_or_file) as file:
+                json_string_or_file = file.read()
+
+        js = json.loads(json_string_or_file)
+
+        if isinstance(js, (list)):
+            for j in js:
+                payload = json.dumps(j)
+                response = self.post('/{0}'.format(model_type), headers=self.headers, payload=payload)
+        else:
+            response = self.post('/{0}'.format(model_type), headers=self.headers, payload=json_string_or_file)
+
+        return True
+
+    create_method.__doc__ = '''
+    Creates a new {0}.
+
+    :type json_string_or_file: str
+    :param json_string_or_file: a json representation of the {0}, or a file containing the json
+    :return: whether the creation of the {0} worked
+    :rtype: bool
+    '''.format(model_type)
+    create_method.__name__ = 'call_create_{0}'.format(model_type)
+    setattr(cls, create_method.__name__, create_method)
+    pretty_method_name = create_method.__name__[len(API_MARKER)+1:]
+    POSITIONAL_ARG_REGISTRY[pretty_method_name] = 'json_string_or_file'
+
 def add_change_value_method(cls, model_type):
 
     def change_value_method(self, id, key, value):
@@ -90,7 +123,6 @@ def add_change_value_method(cls, model_type):
 
         response = self.put('/{0}/{1}'.format(model_type, id), headers=self.headers, payload=value_json)
 
-        print response
         return True
 
     change_value_method.__doc__ = '''
@@ -154,3 +186,4 @@ for model_type in classes:
     add_list_method(projectdb_api, model_type)
     add_get_method(projectdb_api, model_type)
     add_change_value_method(projectdb_api, model_type)
+    add_create_method(projectdb_api, model_type)

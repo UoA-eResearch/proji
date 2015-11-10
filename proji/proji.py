@@ -1,5 +1,10 @@
 # PYTHON_ARGCOMPLETE_OK
 
+from signal import signal, SIGPIPE, SIG_DFL
+
+#Ignore SIG_PIPE and don't throw exceptions on it... (http://docs.python.org/library/signal.html)
+signal(SIGPIPE,SIG_DFL)
+
 from projectdb_api import projectdb_api, PROJECTDB_DEFAULT_URL, POSITIONAL_ARG_REGISTRY
 from projectdb_models import *
 import argparse
@@ -65,6 +70,10 @@ class Proji(object):
         self.cli.add_command(projectdb_api, POSITIONAL_ARG_REGISTRY)
 
         self.cli.parse_arguments()
+
+        if self.cli.namespace.profile:
+            self.cli.parameters['url'] = self.config.config.get(self.cli.namespace.profile, 'url')
+            self.cli.parameters['token'] = self.config.config.get(self.cli.namespace.profile, 'token')
 
         self.url = self.cli.namespace.url
         self.username = self.cli.namespace.username
