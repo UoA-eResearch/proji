@@ -32,9 +32,11 @@ class division(Model):
     id = fields.Integer()
     code = fields.String()
     institutionId = fields.Integer()
+    institutionCode = fields.String()
     name = fields.String()
     level = fields.Integer()
     parent = fields.Field()
+    topId = fields.Integer()
     top = fields.Field()
 
 

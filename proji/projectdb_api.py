@@ -90,16 +90,27 @@ def add_create_method(cls, model_type):
             with open(json_string_or_file) as file:
                 json_string_or_file = file.read()
 
+
         js = json.loads(json_string_or_file)
 
+        result = []
+        cls = eval(model_type)
+
         if isinstance(js, (list)):
+            print js
+
             for j in js:
                 payload = json.dumps(j)
                 response = self.post('/{0}'.format(model_type), headers=self.headers, payload=payload)
+                result_dict = json.loads(response.body_string())
+                result.append(cls(**result_dict))
         else:
             response = self.post('/{0}'.format(model_type), headers=self.headers, payload=json_string_or_file)
+            result_dict = json.loads(response.body_string())
+            print result_dict
+            result = cls(**result_dict)
 
-        return True
+        return result
 
     create_method.__doc__ = '''
     Creates a new {0}.
