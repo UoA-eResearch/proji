@@ -24,20 +24,15 @@ class Date(fields.Field):
         super(Date, self).__init__(DateValidator(), *args, **kwargs)
 
 
+
 # Models ========================================
 
 class division(Model):
 
-
     id = fields.Integer()
     code = fields.String()
-    institutionId = fields.Integer()
-    institutionCode = fields.String()
     name = fields.String()
-    level = fields.Integer()
     parent = fields.Field()
-    topId = fields.Integer()
-    top = fields.Field()
 
 
 class externalReference(Model):
@@ -91,7 +86,6 @@ class person(Model):
     email = fields.Email()
     endDate = Date()
     fullName = fields.String()
-    institution = fields.String()
     lastModified = fields.Integer()
     notes = fields.String()
     phone = fields.String()
@@ -99,7 +93,6 @@ class person(Model):
     preferredName = fields.String()
     startDate = Date()
     status = fields.String()
-    statusId = fields.Integer()
 
 class personRole(Model):
 
@@ -109,9 +102,9 @@ class personRole(Model):
 class project(Model):
 
     id = fields.Integer()
-    divisionIds = fields.Collection(fields.Integer)
-    statusId = fields.Integer()
-    typeId = fields.Integer()
+    divisions = fields.Collection(fields.String)
+    status = fields.String()
+    type = fields.String()
     description = fields.String()
     endDate = Date()
     title = fields.String()
@@ -121,12 +114,6 @@ class project(Model):
     requirements = fields.String()
     startDate = Date()
     todo = fields.String()
-
-    divisions = fields.String()
-    institutions = fields.String()
-    status = fields.String()
-    type = fields.String()
-
 
 class personProject(Model):
 
@@ -138,7 +125,6 @@ class personProject(Model):
     personRole = fields.Embedded(personRole)
     projectId = fields.Integer()
     project = fields.Embedded(project)
-
 
 class personProperty(Model):
 
@@ -188,3 +174,8 @@ class projectKpi(Model):
     kpiType = fields.String()
     kpiNumber = fields.Integer()
     personFullName = fields.String()
+
+class projectStatus(Model):
+
+    id = fields.Integer()
+    name = fields.String()

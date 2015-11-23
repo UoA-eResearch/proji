@@ -36,8 +36,9 @@ def add_list_method(cls, model_type):
 
         response = self.get('/'+model_type, params_dict=get_request_params(), headers=self.headers)
 
-        result_list = json.loads(response.body_string())
-
+        response_string = response.body_string()
+        # print response_string
+        result_list = json.loads(response_string)
         cls = eval(model_type)
 
         result = []
@@ -62,7 +63,9 @@ def add_get_method(cls, model_type):
 
         response = self.get('/{0}/{1}'.format(model_type, id), params_dict=get_request_params(), headers=self.headers)
 
-        result_dict = json.loads(response.body_string())
+        response_string = response.body_string()
+        # print response_string
+        result_dict = json.loads(response_string)
 
         cls  = eval(model_type)
         result = cls(**result_dict)
@@ -154,26 +157,27 @@ def add_change_value_method(cls, model_type):
 
 
 classes = [
-        'authzRole',
-        'department',
-        'division',
-        'externalReference',
-        'facility',
-        'institution',
-        'institutionalRole',
-        'kpiCategory',
-        'kpi',
-        'person',
-        'personProject',
-        'personProperty',
-        'personRole',
-        'personStatus',
-        'project',
-        'projectAction',
-        'projectActionType',
-        'projectFacility',
-        'projectKpi'
-    ]
+    'authzRole',
+    'department',
+    'division',
+    'externalReference',
+    'facility',
+    'institution',
+    'institutionalRole',
+    'kpiCategory',
+    'kpi',
+    'person',
+    'personProject',
+    'personProperty',
+    'personRole',
+    'personStatus',
+    'project',
+    'projectAction',
+    'projectActionType',
+    'projectFacility',
+    'projectKpi',
+    'projectStatus'
+]
 
 
 # API-Wrapper classes ========================================
