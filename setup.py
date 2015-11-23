@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='proji',
-      version='0.2',
+      version='0.3',
       author="Markus Binsteiner",
       author_email="makkus@gmail.com",
       install_requires=[
