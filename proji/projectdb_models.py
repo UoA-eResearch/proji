@@ -26,7 +26,6 @@ class Date(fields.Field):
 
 
 # Models ========================================
-
 class division(Model):
 
     id = fields.Integer()
@@ -50,19 +49,18 @@ class facility(Model):
     name = fields.String()
 
 
-class institutionalRole(Model):
+class divisionalRole(Model):
 
     id = fields.Integer()
     name = fields.String()
 
 
-class institution(Model):
+class affiliation(Model):
 
-    id = fields.Integer()
-    code = fields.String()
-    name = fields.String()
+    division = fields.String()
+    role = fields.String()
 
-
+    
 class kpiCategory(Model):
 
     id = fields.Integer()
@@ -82,7 +80,7 @@ class kpi(Model):
 class person(Model):
 
     id = fields.Integer()
-    affiliations = fields.Collection(fields.Field)
+    affiliations = fields.Collection(affiliation)
     email = fields.Email()
     endDate = Date()
     fullName = fields.String()

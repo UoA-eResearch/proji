@@ -65,6 +65,5 @@ The following examples can be used on any of the possible model types.
 **** Get details for projects 1 & 2, but only print title
     : proji -o title get_project 1 2
 
-**** output valid json for a list of results:
-
-    : echo '[' `proji -s ',' list_person` ']'
+**** Get division code and it's parent code
+    : proji -o code,parent.code list_division
